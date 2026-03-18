@@ -1,0 +1,10 @@
+data/
+test_data/
+
+models/
+*.pt
+*.pth
+
+__pycache__/
+.DS_Store
+.vscode
