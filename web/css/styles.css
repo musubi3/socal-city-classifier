@@ -1,0 +1,81 @@
+:root:not([color-scheme]) {
+    --tooltip: oklch(from var(--card) 90% c h / 0.67)
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([color-scheme]) {
+        --tooltip: oklch(from var(--card) 20% c h / 0.8)
+    }
+}
+
+:root[color-scheme="light"] {
+    --tooltip: oklch(from var(--card) 90% c h / 0.67)
+}
+
+:root[color-scheme="dark"] {
+    --tooltip: oklch(from var(--card) 20% c h / 0.8)
+}
+
+#img-container {
+  align-items: center;
+  background-color: var(--card);
+  box-shadow: 0 2px 6px var(--card-shadow);
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+}
+
+.tech-tags {
+    display: flex;
+    gap: 0.5em;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+
+.tag {
+    transition: all 0.2s ease;
+}
+
+.tag:hover {
+    box-shadow: 0 4px 12px var(--skill-shadow);
+    transform: translateY(-2px) !important;
+}
+
+#loss-chart-container {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    margin-top: 1.5rem;
+    background: var(--card);
+    box-shadow: 0 2px 6px var(--card-shadow);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.chart-line { stroke: var(--color-accent); }
+.chart-area { fill: oklch(from var(--color-accent) l c h / 0.2); opacity: 0.5; }
+.chart-axis text { fill: var(--text-color); }
+.chart-axis line, .chart-axis path { stroke: var(--text-color); }
+
+.html-tooltip {
+    position: absolute;
+    pointer-events: none;
+    background-color: var(--tooltip); 
+    backdrop-filter: blur(4px); 
+    -webkit-backdrop-filter: blur(4px); 
+    color: var(--text-color);
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-family: monospace;
+    font-size: 13px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    opacity: 0; 
+    transition: opacity 0.2s ease; 
+}
+
+/* .tooltip-dot {
+    fill: var(--tooltip);     
+    stroke: var(--tooltip);  
+    stroke-width: 2px;
+} */

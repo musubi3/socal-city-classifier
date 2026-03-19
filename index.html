@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://musubi3.github.io/global.js" type="module"></script>
+    <link rel="stylesheet" href="https://musubi3.github.io/global.css">
+    <link rel="stylesheet" href="./web/css/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <title>Southern California City Classifier</title>
+
+    <meta property="og:image" content="https://i.postimg.cc/7Ybs7WHM/hero-image.png">
+    <meta property="og:title" content="Southern California City Classifier" />
+    <meta property="og:description"
+        content="A PyTorch CNN achieving 98% accuracy in classifying street-view images of six Southern California cities." />
+
+    <script src="web/js/loss_curve.js" defer></script>
+</head>
+
+<body>
+    <div class="content project-detail">
+        <header class="project-header">
+            <h1>Southern California City Classifier</h1>
+            <div class="project-meta">
+                <p class="project-author">Justin Lee</p>
+                <div class="project-info">
+                    <span class="tag project-date">Winter 2026</span>
+                    <span class="tag project-category">DSC 140B Project</span>
+                </div>
+            </div>
+        </header>
+
+        <p>Pushing past a 36% human baseline to achieve 98% machine accuracy using a fine-tuned MobileNetV3-Large architecture.</p>
+
+        <div id="img-container">
+            <img src="web/lib/hero-image.png" alt="Grid of Southern California street views correctly classified" class="project-hero" width="100%">
+        </div>
+
+        <div class="project-section">
+            <h2>The Challenge</h2>
+            <p>
+                Classifying geographic locations based purely on street-level imagery is a notoriously difficult task. 
+                Many Southern California cities share identical biomes, infrastructure styles, and lighting conditions. 
+                To establish a baseline, a human test yielded only a <strong>36% accuracy rate</strong> when attempting to distinguish between these six regions:
+                Anaheim, Bakersfield, Los Angeles, Riverside, San Luis Obispo (SLO), and San Diego.
+            </p>
+        </div>
+
+        <div class="project-section">
+            <h2>The Data & Preprocessing</h2>
+            <p>
+                The model was trained on a dataset of approximately 9,100 labeled street-view images. 
+                To prevent the network from overfitting on specific camera angles or times of day, aggressive data augmentation was applied to the training pipeline:
+            </p>
+            <ul>
+                <li><strong>Random Horizontal Flips</strong> (50% probability)</li>
+                <li><strong>Random Rotations</strong> (up to 15 degrees)</li>
+                <li><strong>Color Jittering</strong> (adjusting brightness, contrast, and saturation)</li>
+            </ul>
+        </div>
+
+        <div class="project-section">
+            <h2>Architecture & Training</h2>
+            <p>
+                The core engine of this project is a <strong>MobileNetV3-Large</strong> Convolutional Neural Network (CNN) pre-trained on ImageNet1K. 
+                This specific architecture was chosen to maximize feature extraction while keeping the final weights file under a strict 50MB constraint.
+            </p>
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <span class="stat-number">~5.4M</span>
+                    <span class="stat-label">Parameters</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">10</span>
+                    <span class="stat-label">Epochs</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">0.001</span>
+                    <span class="stat-label">Initial LR (Adam)</span>
+                </div>
+            </div>
+            <p>
+                To ensure gentle convergence and prevent the model from overshooting the local minima in the final epochs, a <code>StepLR</code> scheduler was implemented, decaying the learning rate by 50% every 3 epochs.
+            </p>
+            
+            <div id="loss-chart-container"></div>
+        </div>
+
+        <div class="project-section">
+            <h2>Results</h2>
+            <p>
+                Evaluated against a completely unseen testing dataset, the model achieved a staggering <strong>92.92% validation accuracy</strong>, thoroughly outperforming the human baseline and demonstrating a deep structural understanding of the subtle differences between SoCal cities.
+            </p>
+        </div>
+
+        <div class="project-section">
+            <h2>Built With</h2>
+            <div class="tech-tags">
+                <span class="tag">PyTorch</span>
+                <span class="tag">Python</span>
+                <span class="tag">Torchvision</span>
+                <span class="tag">MobileNetV3</span>
+                <span class="tag">Pillow (PIL)</span>
+                <span class="tag">Matplotlib</span>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
