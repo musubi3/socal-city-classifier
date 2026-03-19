@@ -11,7 +11,7 @@ const svg = container.append("svg")
     .style("max-width", "100%")
     .style("height", "auto");
 
-d3.json("web/lib/losses.json").then(function (data) {
+d3.json("lib/losses.json").then(function (data) {
 
     const parsedData = data.map((d, i) => ({ iteration: i, loss: d }));
 
