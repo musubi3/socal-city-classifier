@@ -36,7 +36,7 @@ def predict(test_dir):
     num_features = model.classifier[3].in_features
     model.classifier[3] = nn.Linear(num_features, len(CLASSES))
 
-    weights_path = './weights/model_weights.pt'
+    weights_path = './models/model_weights.pt'
     model.load_state_dict(torch.load(weights_path, map_location=device))
     model.to(device)
     model.eval()

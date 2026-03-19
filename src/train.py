@@ -7,6 +7,7 @@ from torch.utils.data import Dataset, DataLoader, Subset
 from torchvision import transforms, models
 from PIL import Image
 import time
+import json
 
 os.environ['KMP_DUPLICATE_LIB_OK'] = 'True'
 
@@ -82,7 +83,7 @@ def train_model():
     scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=3, gamma=0.5)
 
     epochs = 10
-    # losses = []
+    losses = []
 
     print('Starting training...')
     start_time = time.time()
@@ -101,7 +102,7 @@ def train_model():
             optimizer.step()
             running_loss += loss.item()
             
-            # losses.append(loss.item())
+            losses.append(loss.item())
             
             if i % 50 == 49:
                 print(f'Epoch {epoch + 1}, Batch {i + 1}, Loss: {running_loss / 50:.3f}')
@@ -133,8 +134,12 @@ def train_model():
     minutes = int(total_seconds // 60)
     seconds = int(total_seconds % 60)
 
-    torch.save(model.state_dict(), './weights/model_weights.pt')
+    torch.save(model.state_dict(), './models/model_weights.pt')
     print(f'Training complete in {minutes} minutes and {seconds} seconds. Weights saved.')
+
+    # with open('losses.json', 'w') as f:
+    #     json.dump(losses, f)
+    # print("Training data exported to losses.json")
 
     # plt.plot(losses)
     # plt.xlabel('Iteration')
