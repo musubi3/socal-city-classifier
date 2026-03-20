@@ -93,8 +93,9 @@
     transition: opacity 0.2s ease; 
 }
 
-/* .tooltip-dot {
-    fill: var(--tooltip);     
-    stroke: var(--tooltip);  
-    stroke-width: 2px;
-} */
+@media (max-width: 768px) {
+    .tag {
+        font-size: 12px;
+        padding: 7px 14px;
+    }
+}
