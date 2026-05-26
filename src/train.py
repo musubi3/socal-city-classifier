@@ -72,7 +72,7 @@ def train_model():
     train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True)
     val_loader = DataLoader(val_dataset, batch_size=32, shuffle=False)
 
-    model = models.mobilenet_v3_large(weights='IMAGENET1K_V1') # <-- Changed here
+    model = models.mobilenet_v3_large(weights='IMAGENET1K_V1')
     num_features = model.classifier[3].in_features
     model.classifier[3] = nn.Linear(num_features, 6)
     model = model.to(device)
@@ -139,14 +139,12 @@ def train_model():
 
     # with open('losses.json', 'w') as f:
     #     json.dump(losses, f)
-    # print("Training data exported to losses.json")
 
     # plt.plot(losses)
     # plt.xlabel('Iteration')
     # plt.ylabel('Empirical Risk (Loss)')
     # plt.title('Training Curve')
-    # plt.savefig('training_curve.png')
-    # print('Training curve plot saved to training_curve.png')
+
 
 if __name__ == '__main__':
     train_model()
